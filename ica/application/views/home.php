@@ -1,3 +1,3 @@
-<div class="content">
-    <p> Welcome to MCAST Institute for the Creative Arts Website! </p>
+<div class="home-image">
+    <img src="<?=base_url('images/home.png');?>" alt="welcome" width="100%" height="100%">
 </div>
