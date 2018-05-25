@@ -24,8 +24,16 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link text-white active" href="<?=site_url('about');?>" >About</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" =>
+                                About
+                            </a>
+                            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item text-center text-white" href="<?=site_url('staff');?>">Staff</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-center text-white" href="<?=site_url('mcast');?>">Mcast</a>
+                                <div class="dropdown-divider"></div>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="<?=site_url('studentport');?>">Student Portfolio</a>
@@ -42,11 +50,14 @@
                                 <a class="dropdown-item text-center text-white" href="<?=site_url('studentlink');?>">Student Links</a>
                             </div>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item acitve">
                             <a class="nav-link text-white" href="<?=site_url('canclec');?>">Cancelled Lectures</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="<?=site_url('contact');?>">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="<?=site_url('login');?>">Sign In/Sign Up</a>
                         </li>
                     </ul>
                 </div>
