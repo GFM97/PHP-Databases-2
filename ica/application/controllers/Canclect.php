@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Canclec extends CI_Controller {
+class Canclect extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -21,7 +21,12 @@ class Canclec extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('templates/top');
-		$this->load->view('canclec');
+		$this->load->view('canclect');
 		$this->load->view('templates/bottom');
+	}
+
+	public function add()
+	{
+		echo "yaaaaassssss";
 	}
 }

@@ -9,32 +9,22 @@
 						<div class="form-group">
 							<label for="email">E-Mail Address</label>
 
-							<input id="email" type="email" class="form-control" name="email" value="" required autofocus>
+							<input id="email" type="email" class="form-control" name="email" required autofocus>
 						</div>
 
 						<div class="form-group">
-							<label for="password">Password
-								<a href="forgot" style="margin-left: 55px">
-									Forgot Password?
-								</a>
-							</label>
+							<label for="password">Password</label>
 							<input id="password" type="password" class="form-control" name="password" required data-eye>
 						</div>
 
-						<div class="form-group">
-							<label>
-								<input type="checkbox" name="remember"> Remember Me
-							</label>
-						</div>
-
 						<div class="form-group no-margin">
-							<button type="submit" class="btn btn-primary btn-block">
+							<button type="submit" class="btn btn-primary btn-block" >
 								Login
 							</button>
 						</div>
 
 						<div class="margin-top20 text-center">
-							<a href="register">Create new account</a>
+							<?=anchor('register', 'Create new account')?>
 						</div>
 					</form>
 				</div>

@@ -16,7 +16,7 @@ class Lecturer_Model extends CI_Model {
         );
 
         // An INSERT query:
-        // INSERT INTO tbl_users (cols) VALUES (cols)
+        // INSERT INTO tbl_admin (cols) VALUES (cols)
         $this->db->insert('tbl_lecturer', $data);
 
         // gives us whatever the primary key (AI) value is

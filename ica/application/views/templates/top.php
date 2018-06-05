@@ -51,7 +51,7 @@
                             </div>
                         </li>
                         <li class="nav-item acitve">
-                            <a class="nav-link text-white" href="<?=site_url('canclec');?>">Cancelled Lectures</a>
+                            <a class="nav-link text-white" href="<?=site_url('canclect');?>">Cancelled Lectures</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="<?=site_url('contact');?>">Contact Us</a>

@@ -11,6 +11,13 @@ class System extends MY_Controller {
         $this->load->library(array('form_validation' => 'fv'));
     }
 
+    public function register()
+	{
+		$this->load->view('templates/top');
+		$this->load->view('register');
+		$this->load->view('templates/bottom');
+	}
+
 	# The Login Page
 	public function login()
 	{
@@ -18,6 +25,12 @@ class System extends MY_Controller {
             'page_title'    => 'Login',
             'form_action'   => 'login/submit',
             'form'          => array(
+                'Name'         => array(
+                    'type'          => 'name',
+                    'placeholder'   => 'name',
+                    'name'          => 'name',
+                    'id'            => 'input-name'
+                ),
                 'Email'         => array(
                     'type'          => 'email',
                     'placeholder'   => 'me@example.com',
@@ -54,6 +67,7 @@ class System extends MY_Controller {
         }
 
         # 2. Retrieve the data for checking
+        $name      = $this->input->post('name');
         $email      = $this->input->post('email');
         $password   = $this->input->post('password');
 
@@ -89,7 +103,7 @@ class System extends MY_Controller {
         $this->session->set_userdata($data);
 
         # 10. Redirect home
-        redirect('home/success');
+        redirect('/');
 
     }
 
@@ -111,45 +125,6 @@ class System extends MY_Controller {
 
     }
 
-
-    # The Register Page
-	public function register()
-	{
-        $data = array(
-            'page_title'    => 'Register',
-            'form_action'   => 'register/submit',
-            'form'          => array(
-                'Name'          => array(
-                    'type'          => 'text',
-                    'placeholder'   => 'name',
-                    'name'          => 'name',
-                    'id'            => 'input-name'
-                ),
-                'Email'         => array(
-                    'type'          => 'email',
-                    'placeholder'   => 'me@example.com',
-                    'name'          => 'email',
-                    'id'            => 'input-email'
-                ),
-                'Password'      => array(
-                    'type'          => 'password',
-                    'placeholder'   => 'password',
-                    'name'          => 'password',
-                    'id'            => 'input-password'
-                ),
-            ),
-            'buttons'       => array(
-                'submit'        => array(
-                    'type'          => 'submit',
-                    'content'       => 'Log In'
-                )
-            )
-        );
-
-        $this->load->view('system/form', $data);
-	}
-
-
     # The Register Submission page
     public function register_submit()
     {
@@ -161,6 +136,7 @@ class System extends MY_Controller {
         }
 
         # 2. Retrieve the first set of data
+        $name      = $this->input->post('name');
         $email      = $this->input->post('email');
         $password   = $this->input->post('password');
 
@@ -169,7 +145,7 @@ class System extends MY_Controller {
         $salt       = bin2hex($this->encryption->create_key(8));
 
         # 3. Add them to the database, and retrieve the ID
-        $id = $this->system->add_user($email, $password, $salt);
+        $id = $this->system->add_user($name, $email, $password, $salt);
 
         # 4. If the ID didn't register, we can't continue.
         if ($id === FALSE)
@@ -182,7 +158,7 @@ class System extends MY_Controller {
         $name       = $this->input->post('name');
 
         # 6. Add the details to the next table
-        $check = $this->system->user_details($id, $name, $surname);
+        $check = $this->system->user_details($id, $name, $email);
 
         # 7. If the query failed, delete the user to avoid partial data.
         if ($check === FALSE)

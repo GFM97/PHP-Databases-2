@@ -4,7 +4,7 @@
 			<div class="card fat">
 				<div class="card-body">
 					<h4 class="card-title">Register</h4>
-					<form method="POST">
+					<?=form_open('register/submit');?>
 
 						<div class="form-group">
 							<label for="name">Name</label>
@@ -21,12 +21,6 @@
 							<input id="password" type="password" class="form-control" name="password" required data-eye>
 						</div>
 
-						<div class="form-group">
-							<label>
-								<input type="checkbox" name="aggree" value="1"> I agree to the Terms and Conditions
-							</label>
-						</div>
-
 						<div class="form-group no-margin">
 							<button type="submit" class="btn btn-primary btn-block">
 								Register
@@ -35,7 +29,7 @@
 						<div class="margin-top20 text-center">
 							Already have an account? <a href="login">Login</a>
 						</div>
-					</form>
+					<?=form_close();?>
 				</div>
 			</div>
 		</div>

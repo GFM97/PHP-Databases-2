@@ -27,7 +27,7 @@ $config = array(
         array(
             'field' => 'email',
             'label' => 'Email',
-            'rules' => 'required|valid_email|is_unique[tbl_users.u_email]'
+            'rules' => 'required|valid_email|is_unique[tbl_admin.info_email]'
         ),
         array(
             'field' => 'password',

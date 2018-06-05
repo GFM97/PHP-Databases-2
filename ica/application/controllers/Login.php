@@ -20,9 +20,6 @@ class Login extends MY_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('templates/top');
-		$this->load->view('login');
-		$this->load->view('templates/bottom');
 
 		//the variables are being called from an associative array which can be called by name from the pages
 		$data = array(
@@ -124,7 +121,7 @@ class Login extends MY_Controller {
             array(
 				'field' => 'email',
 				'label' => 'email',
-				'rules' => 'required|valid_email|is_unique[tbl_users.email]'
+				'rules' => 'required|valid_email|is_unique[tbl_admin.email]'
 			),
             array(
 				'field' => 'name',
