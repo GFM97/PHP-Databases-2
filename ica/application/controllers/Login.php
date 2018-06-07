@@ -27,7 +27,7 @@ class Login extends MY_Controller {
 			'message'  => 'Success!!!!!'
 		);
 		//this command loads a view from the views folder
-		$this->build('login', $data);
+		$this->build('Login', $data);
 	}
 
 	public function contact($submit = FALSE) {

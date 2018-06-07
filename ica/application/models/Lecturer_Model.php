@@ -6,18 +6,18 @@ class Lecturer_Model extends CI_Model {
     public function add_lecturer($lecname, $lecsurname, $lecemail,$cname, $lecimage) {
 
         $data = array(
-            'lecname'     => $lecname,
-            'lecsurname'  => $lecsurname,
-            'lecemail'    => $lecemail,
-            'cname'     => $cname,
-            'lecimage'  => $lecimage
+            'staff_name'     => $lecname,
+            'staff_surname'  => $lecsurname,
+            'staff_email'    => $lecemail,
+            'staff_subject'  => $cname,
+            'staff_image'    => $lecimage
 
 
         );
 
         // An INSERT query:
         // INSERT INTO tbl_admin (cols) VALUES (cols)
-        $this->db->insert('tbl_lecturer', $data);
+        $this->db->insert('tbl_staff', $data);
 
         // gives us whatever the primary key (AI) value is
         return $this->db->insert_id();
@@ -42,7 +42,7 @@ class Lecturer_Model extends CI_Model {
         // run a query and return the row immediately
         return $this->db->select('*')
                         ->where('id', $id)
-                        ->get('tbl_lecturer')
+                        ->get('tbl_staff')
                         ->row_array();
 
     }
@@ -63,7 +63,7 @@ class Lecturer_Model extends CI_Model {
 
         // this is the entire update query
         $this->db->where('id', $id)
-                 ->update('tbl_lecturer', $data);
+                 ->update('tbl_staff', $data);
 
         // TRUE or FALSE if there has been a change
         return $this->db->affected_rows() == 1;
@@ -81,7 +81,7 @@ class Lecturer_Model extends CI_Model {
         if (!empty($lecimage)) $data['lecimage'] = $lecimage;
 
         // TRUE or FALSE if there has been a change
-        return $this->db->get_where('tbl_lecturer', $data)->num_rows() == 1;
+        return $this->db->get_where('tbl_staff', $data)->num_rows() == 1;
 
     }
 
@@ -94,7 +94,7 @@ class Lecturer_Model extends CI_Model {
 
         // will give me a true or false depending
         // on what comes up from the query
-        return $this->db->get_where('tbl_lecturer', $data)->num_rows() == 0;
+        return $this->db->get_where('tbl_staff', $data)->num_rows() == 0;
 
     }
 

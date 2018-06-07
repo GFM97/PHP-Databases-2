@@ -4,17 +4,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class System_Model extends CI_Model {
 
     # Register a user into the first table
-    public function add_user($name, $email, $password, $salt)
+    public function add_users($name, $email, $password, $salt)
     {
 
         $data = array(
-            'info_name'       => $name,
-            'info_email'       => $email,
-            'info_password'    => password_hash($salt.$password, CRYPT_BLOWFISH),
+            'u_name'       => $name,
+            'u_email'       => $email,
+            'u_password'    => password_hash($salt.$password, CRYPT_BLOWFISH),
             'u_salt'        => strrev($salt)
         );
 
-        $this->db->insert('tbl_admin', $data);
+        $this->db->insert('tbl_users', $data);
 
         return $this->db->insert_id();
 
@@ -27,17 +27,17 @@ class System_Model extends CI_Model {
 
         $data = array(
             'id'       => $id,
-            'info_name'        => $name
+            'u_name'   => $name
         );
 
-        return $this->db->get_where('tbl_admin', $data)->num_rows() == 1;
+        return $this->db->get_where('tbl_users', $data)->num_rows() == 1;
     }
 
 
     # Deletes a user from the database
     public function delete_user($id)
     {
-        $this->db->delete('tbl_admin', array('id' => $id));
+        $this->db->delete('tbl_users', array('id' => $id));
     }
 
 
@@ -51,7 +51,7 @@ class System_Model extends CI_Model {
 
         $data = array(
             'user_id'       => $id,
-            'info_name'        => $name,
+            'u_name'        => $name,
             'u_creation'    => time()
         );
 
@@ -64,14 +64,14 @@ class System_Model extends CI_Model {
     # Checks the password provided by the user
     public function check_password($email, $password)
     {
-        $info = $this->db->select('id, info_password, u_salt')
-                        ->where('info_email', $email)
-                        ->get('tbl_admin')
+        $info = $this->db->select('id, u_password, u_salt')
+                        ->where('u_email', $email)
+                        ->get('tbl_users')
                         ->row_array();
 
         $checkstr = strrev($info['u_salt']).$password;
 
-        return password_verify($checkstr, $info['info_password']) ? $info['id'] : FALSE;
+        return password_verify($checkstr, $info['u_password']) ? $info['id'] : FALSE;
     }
 
 
@@ -84,16 +84,16 @@ class System_Model extends CI_Model {
             return FALSE;
         }
 
-        return $this->db->select('tbl_admin.id,
+        return $this->db->select('tbl_users.id,
                             tbl_roles.name AS role,
-                            tbl_admin.info_email AS email,
-                            tbl_user_details.info_name AS name,
+                            tbl_users.u_email AS email,
+                            tbl_user_details.u_name AS name,
                             tbl_login_info.u_persistence AS session_code')
-                        ->join('tbl_user_details', 'tbl_user_details.user_id = tbl_admin.id', 'left')
-                        ->join('tbl_login_info', 'tbl_login_info.user_id = tbl_admin.id', 'left')
-                        ->join('tbl_roles', 'tbl_roles.id = tbl_admin.role_id', 'left')
-                        ->where('tbl_admin.id', $id)
-                        ->get('tbl_admin')
+                        ->join('tbl_user_details', 'tbl_user_details.user_id = tbl_users.id', 'left')
+                        ->join('tbl_login_info', 'tbl_login_info.user_id = tbl_users.id', 'left')
+                        ->join('tbl_roles', 'tbl_roles.id = tbl_users.role_id', 'left')
+                        ->where('tbl_users.id', $id)
+                        ->get('tbl_users')
                         ->row_array();
     }
 
@@ -115,13 +115,13 @@ class System_Model extends CI_Model {
     public function check_data($id, $email, $code)
     {
         $data = array(
-            'tbl_admin.id'                  => $id,
-            'tbl_admin.info_email'             => $email,
+            'tbl_users.id'                  => $id,
+            'tbl_users.u_email'             => $email,
         );
 
-        return $this->db->select('tbl_admin.id')
-                        ->join('tbl_login_info', 'tbl_login_info.user_id = tbl_admin.id', 'left')
-                        ->get_where('tbl_admin', $data)
+        return $this->db->select('tbl_users.id')
+                        ->join('tbl_login_info', 'tbl_login_info.user_id = tbl_users.id', 'left')
+                        ->get_where('tbl_users', $data)
                         ->num_rows() == 1;
     }
 

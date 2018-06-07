@@ -58,3 +58,5 @@ $route['login/submit'] = 'system/login_submit';
 
 $route['register'] = 'system/register';
 $route['register/submit'] = 'system/register_submit';
+
+$route['logout'] = 'system/logout';

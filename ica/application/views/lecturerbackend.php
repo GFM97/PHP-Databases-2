@@ -24,42 +24,25 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" =>
-                                About
-                            </a>
-                            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item text-center text-white" href="<?=site_url('staff');?>">Staff</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-center text-white" href="<?=site_url('mcast');?>">Mcast</a>
-                                <div class="dropdown-divider"></div>
-                            </div>
-                        </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="<?=site_url('studentport');?>">Student Portfolio</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" =>
-                                Student
-                            </a>
-                            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item text-center text-white" href="<?=site_url('notices');?>">Notices</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-center text-white" href="<?=site_url('vacancies');?>">Vacancies</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-center text-white" href="<?=site_url('studentlink');?>">Student Links</a>
-                            </div>
+                            <a class="nav-link text-white" href="<?=site_url('lecturerbackend');?>">Lecturer</a>
                         </li>
                         <li class="nav-item acitve">
-                            <a class="nav-link text-white" href="<?=site_url('canclect');?>">Cancelled Lectures</a>
+                            <a class="nav-link text-white" href="<?=site_url('canclectbackend');?>">Cancelled Lectures</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="<?=site_url('contact');?>">Contact Us</a>
+                            <a class="nav-link text-white" href="<?=site_url('studentportbackend');?>">Student Portfolio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="<?=site_url('Login');?>">Sign In/Sign Up</a>
+                            <a class="nav-link text-white" href="<?=site_url('vacbackend');?>">Vacancies</a>
+                        </li>
+                        <li class="nav-item">
+                            <?=  anchor('logout', 'Logout', 'class = nav-link'); ?>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
+        <div class="add_lecturer">
+            <button type="button" class="btn btn-md" href="<?=site_url('Staff');?>" style="padding:10px; margin-top:50px; margin-left:30px;">Add lecturer</button>
+        </div>

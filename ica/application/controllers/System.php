@@ -1,4 +1,4 @@
-<?php
+backend<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class System extends MY_Controller {
@@ -11,13 +11,6 @@ class System extends MY_Controller {
         $this->load->library(array('form_validation' => 'fv'));
     }
 
-    public function register()
-	{
-		$this->load->view('templates/top');
-		$this->load->view('register');
-		$this->load->view('templates/bottom');
-	}
-
 	# The Login Page
 	public function login()
 	{
@@ -25,12 +18,6 @@ class System extends MY_Controller {
             'page_title'    => 'Login',
             'form_action'   => 'login/submit',
             'form'          => array(
-                'Name'         => array(
-                    'type'          => 'name',
-                    'placeholder'   => 'name',
-                    'name'          => 'name',
-                    'id'            => 'input-name'
-                ),
                 'Email'         => array(
                     'type'          => 'email',
                     'placeholder'   => 'me@example.com',
@@ -103,7 +90,7 @@ class System extends MY_Controller {
         $this->session->set_userdata($data);
 
         # 10. Redirect home
-        redirect('/');
+        redirect('backend');
 
     }
 
@@ -117,13 +104,54 @@ class System extends MY_Controller {
 
         # 2. Remove the information from the session.
         $this->session->unset_userdata(array(
-            'id', 'email', 'name', 'surname', 'session_code'
+            'id', 'email', 'name', 'session_code'
         ));
 
         # 3. Take the user home
         redirect('/');
 
     }
+
+
+    # The Register Page
+	public function register()
+	{
+        $this ->load->model('System_Model');
+        /*
+        $data = array(
+            'page_title'    => 'Register',
+            'form_action'   => 'register/submit',
+            'form'          => array(
+                'Name'          => array(
+                    'type'          => 'text',
+                    'placeholder'   => 'Joseph',
+                    'name'          => 'name',
+                    'id'            => 'input-name'
+                ),
+                'Email'         => array(
+                    'type'          => 'email',
+                    'placeholder'   => 'me@example.com',
+                    'name'          => 'email',
+                    'id'            => 'input-email'
+                ),
+                'Password'      => array(
+                    'type'          => 'password',
+                    'placeholder'   => 'password',
+                    'name'          => 'password',
+                    'id'            => 'input-password'
+                ),
+            ),
+            'buttons'       => array(
+                'submit'        => array(
+                    'type'          => 'submit',
+                    'content'       => 'Register'
+                )
+            )
+        );
+        */
+        $this->build('register');
+	}
+
 
     # The Register Submission page
     public function register_submit()
@@ -136,7 +164,7 @@ class System extends MY_Controller {
         }
 
         # 2. Retrieve the first set of data
-        $name      = $this->input->post('name');
+        $name       = $this->input->post('name');
         $email      = $this->input->post('email');
         $password   = $this->input->post('password');
 
@@ -145,7 +173,7 @@ class System extends MY_Controller {
         $salt       = bin2hex($this->encryption->create_key(8));
 
         # 3. Add them to the database, and retrieve the ID
-        $id = $this->system->add_user($name, $email, $password, $salt);
+        $id = $this->system->add_users($name, $email, $password, $salt);
 
         # 4. If the ID didn't register, we can't continue.
         if ($id === FALSE)
@@ -158,7 +186,7 @@ class System extends MY_Controller {
         $name       = $this->input->post('name');
 
         # 6. Add the details to the next table
-        $check = $this->system->user_details($id, $name, $email);
+        $check = $this->system->user_details($id, $name);
 
         # 7. If the query failed, delete the user to avoid partial data.
         if ($check === FALSE)
@@ -170,5 +198,10 @@ class System extends MY_Controller {
 
         # 8. Everything is fine, return to the home page.
         redirect('/');
+    }
+
+    public function delete_user(){
+        $this->system->delete_user($id);
+        redirect('backend');
     }
 }

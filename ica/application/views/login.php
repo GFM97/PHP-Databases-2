@@ -4,7 +4,7 @@
 			<div class="card fat">
 				<div class="card-body">
 					<h4 class="card-title">Login</h4>
-					<form method="POST">
+					<?=form_open('login/submit');?>
 
 						<div class="form-group">
 							<label for="email">E-Mail Address</label>
@@ -19,14 +19,14 @@
 
 						<div class="form-group no-margin">
 							<button type="submit" class="btn btn-primary btn-block" >
-								Login
+								<?=anchor('backend', 'Login')?>
 							</button>
 						</div>
 
 						<div class="margin-top20 text-center">
 							<?=anchor('register', 'Create new account')?>
 						</div>
-					</form>
+					<?=form_close();?>
 				</div>
 			</div>
 		</div>

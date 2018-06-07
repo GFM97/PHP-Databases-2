@@ -29,9 +29,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tbl_admin` (
-  `info_name` tinytext NOT NULL,
-  `info_email` tinytext NOT NULL,
-  `info_password` tinytext NOT NULL
+  `u_name` tinytext NOT NULL,
+  `u_email` tinytext NOT NULL,
+  `u_password` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

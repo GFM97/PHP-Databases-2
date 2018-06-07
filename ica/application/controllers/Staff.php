@@ -25,10 +25,72 @@ class Staff extends CI_Controller {
 		$this->load->view('templates/bottom');
 	}
 
-	public function test()
-	{
-		$this->load->model('lecturer_model');
 
-		print_r($this->lecturer_model->all_lecturer());
-	}
+	public function addStaff()
+	{
+		$data = array(
+			'page_title'    => 'Staff',
+			'form_action'   => 'Enter/submit',
+			'form'          => array(
+				'staff_profile'         => array(
+					'type'          => 'staff_profile',
+					'placeholder'   => 'staff_profile',
+					'name'          => 'staff_profile',
+					'id'            => 'input-staff_profile'
+				),
+				'staff_name'         => array(
+					'type'          => 'staff_name',
+					'placeholder'   => 'staff_name',
+					'name'          => 'staff_name',
+					'id'            => 'input-staff_name'
+				),
+				'staff_email'      => array(
+					'type'          => 'staff_email',
+					'placeholder'   => 'staff_email',
+					'name'          => 'staff_email',
+					'id'            => 'input-staff_email'
+				)
+			),
+
+			'buttons'       => array(
+				'submit'        => array(
+					'type'          => 'submit',
+					'content'       => 'Enter'
+
+		)
+	)
+);
+
+		$this->load->view('system/form', $data);
+
+	# canc lect submit
+		public function Staff_submit()
+		{
+			# 1. Check the form for validation errors
+			if ($this->fv->run('Staff') === FALSE)
+			{
+				echo validation_errors();
+				return;
+			}
+
+			# 2. Retrieve the data for checking
+			$lecname      = $this->input->post('staff_name');
+			$lecsurname      = $this->input->post('staff_surname');
+			$lecemail   = $this->input->post('staff_email');
+	#
+			$id = $this->system->add_Staff($lecname, $lecsurname, $lecemail,$cname, $lecimage);
+
+		$check = $this->system->Staff($lecname, $lecsurname, $lecemail,$cname, $lecimage);
+
+		if ($check === FALSE)
+		{
+			$this->system->delete_Staff($id);
+			echo "We couldn't register the  lecturer because of a database error.";
+			return;
+		}
+
+
+		redirect('/');
+
+}
 }
