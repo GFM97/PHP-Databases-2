@@ -26,9 +26,6 @@
 								Register
 							</button>
 						</div>
-						<div class="margin-top20 text-center">
-							Already have an account? <a href="Login">Login</a>
-						</div>
 					<?=form_close();?>
 				</div>
 			</div>

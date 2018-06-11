@@ -59,4 +59,7 @@ $route['login/submit'] = 'system/login_submit';
 $route['register'] = 'system/register';
 $route['register/submit'] = 'system/register_submit';
 
+$route['staffbackend'] = 'system/staffbackend';
+$route['staff/submit'] = 'system/staff_submit';
+
 $route['logout'] = 'system/logout';

@@ -200,6 +200,62 @@ class System extends MY_Controller {
         redirect('/');
     }
 
+    # The Register Page
+	public function staff()
+	{
+        $this ->load->model('Staff_Model');
+        $this->build('staffbackend');
+	}
+
+
+    # The Register Submission page
+    public function staff_submit()
+    {
+        # 1. Check the form for validation errors
+        if ($this->fv->run('staffbackend') === FALSE)
+        {
+            echo validation_errors();
+            return;
+        }
+
+        # 2. Retrieve the first set of data
+        $staff_name       = $this->input->post('staff_name');
+        $staff_surname       = $this->input->post('staff_surname');
+        $staff_subject       = $this->input->post('staff_subject');
+        $staff_email      = $this->input->post('staff_email');
+
+        # 3. Generate a random keyword for added protection
+        # Since the encrypted key is in binary, we should change it to a hex string (0-9, a-f)
+        $salt       = bin2hex($this->encryption->create_key(8));
+
+        # 3. Add them to the database, and retrieve the ID
+        $id = $this->system->add_staff($staff_name, $staff_surname, $staff_subject, $staff_email);
+
+        # 4. If the ID didn't register, we can't continue.
+        if ($id === FALSE)
+        {
+            echo "We couldn't register the user because of a database error.";
+            return;
+        }
+
+        # 5. Retrieve the next data
+        $staff_name       = $this->input->post('staff_name');
+
+        # 6. Add the details to the next table
+        $check = $this->system->staff_details($id, $staff_name);
+
+        # 7. If the query failed, delete the user to avoid partial data.
+        if ($check === FALSE)
+        {
+            $this->system->delete_staff($id);
+            echo "We couldn't register the user because of a database error.";
+            return;
+        }
+
+        # 8. Everything is fine, return to the home page.
+        redirect('backend');
+    }
+
     public function delete_user(){
         $this->system->delete_user($id);
         redirect('backend');

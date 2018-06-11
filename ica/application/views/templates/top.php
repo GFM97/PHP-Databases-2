@@ -57,7 +57,7 @@
                             <a class="nav-link text-white" href="<?=site_url('contact');?>">Contact Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="<?=site_url('Login');?>">Sign In/Sign Up</a>
+                            <a class="nav-link text-white" href="<?=site_url('Login');?>">Login</a>
                         </li>
                     </ul>
                 </div>

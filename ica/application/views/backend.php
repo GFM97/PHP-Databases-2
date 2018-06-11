@@ -37,6 +37,9 @@
                             <a class="nav-link text-white" href="<?=site_url('vacbackend');?>">Vacancies</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-white" href="<?=site_url('registerbackend');?>">Sign Up</a>
+                        </li>
+                        <li class="nav-item">
                             <?=  anchor('logout', 'Logout', 'class = nav-link'); ?>
                         </li>
                     </ul>

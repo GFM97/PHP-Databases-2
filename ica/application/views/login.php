@@ -22,10 +22,6 @@
 								<?=anchor('backend', 'Login')?>
 							</button>
 						</div>
-
-						<div class="margin-top20 text-center">
-							<?=anchor('register', 'Create new account')?>
-						</div>
 					<?=form_close();?>
 				</div>
 			</div>

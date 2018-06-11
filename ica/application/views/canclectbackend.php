@@ -37,6 +37,9 @@
                             <a class="nav-link text-white" href="<?=site_url('vacbackend');?>">Vacancies</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-white" href="<?=site_url('registerbackend');?>">Sign Up</a>
+                        </li>
+                        <li class="nav-item">
                             <?=  anchor('logout', 'Logout', 'class = nav-link'); ?>
                         </li>
                     </ul>
@@ -45,6 +48,5 @@
         </nav>
         <div class="add_lecturer">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown">
-                <span class="navbar-toggler-icon"></span>
             </button>
         </div>

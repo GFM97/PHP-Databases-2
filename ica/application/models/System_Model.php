@@ -135,5 +135,4 @@ class System_Model extends CI_Model {
 
         $this->db->delete('tbl_login_info', $data);
     }
-
 }
