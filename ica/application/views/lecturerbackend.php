@@ -47,5 +47,7 @@
             </div>
         </nav>
         <div class="add_lecturer">
-            <button type="button" class="btn btn-md" href="<?=site_url('Staff');?>" style="padding:10px; margin-top:50px; margin-left:30px;">Add lecturer</button>
+            <a href="staffbackend">
+                <button style="padding:10px; margin-top:50px; margin-left:30px;">Click me</button>
+            </a>
         </div>

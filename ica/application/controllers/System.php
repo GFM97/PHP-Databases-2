@@ -203,7 +203,7 @@ class System extends MY_Controller {
     # The Register Page
 	public function staff()
 	{
-        $this ->load->model('Staff_Model');
+        $this->load->model('staff_model');
         $this->build('staffbackend');
 	}
 
@@ -211,8 +211,10 @@ class System extends MY_Controller {
     # The Register Submission page
     public function staff_submit()
     {
+        $this->load->model('staff_model');
+
         # 1. Check the form for validation errors
-        if ($this->fv->run('staffbackend') === FALSE)
+        if ($this->fv->run('staff') === FALSE)
         {
             echo validation_errors();
             return;
@@ -229,7 +231,7 @@ class System extends MY_Controller {
         $salt       = bin2hex($this->encryption->create_key(8));
 
         # 3. Add them to the database, and retrieve the ID
-        $id = $this->system->add_staff($staff_name, $staff_surname, $staff_subject, $staff_email);
+        $id = $this->staff_model->add_staff($staff_name, $staff_surname, $staff_subject, $staff_email);
 
         # 4. If the ID didn't register, we can't continue.
         if ($id === FALSE)
@@ -242,7 +244,7 @@ class System extends MY_Controller {
         $staff_name       = $this->input->post('staff_name');
 
         # 6. Add the details to the next table
-        $check = $this->system->staff_details($id, $staff_name);
+        //$check = $this->staff_model->staff_details($id, $staff_name);
 
         # 7. If the query failed, delete the user to avoid partial data.
         if ($check === FALSE)
@@ -256,8 +258,46 @@ class System extends MY_Controller {
         redirect('backend');
     }
 
-    public function delete_user(){
-        $this->system->delete_user($id);
-        redirect('backend');
+    // parent::__construct();
+    // $this->load->model('update_model');
+
+    function show_staff_id() {
+        $id = $this->uri->segment(3);
+        $data['tbl_staff'] = $this->update_model->show_staff();
+        $data['single_staff'] = $this->update_model->show_staff_id($id);
+        $this->load->view('update_view', $data);
     }
+    function update_staff_id() {
+        $id= $this->input->post('did');
+        $data = array(
+            'staff_name' => $this->input->post('staff_name'),
+            'staff_surname' => $this->input->post('staff_surname'),
+            'staff_subject' => $this->input->post('staff_subject'),
+            'staff_email' => $this->input->post('staff_email')
+        );
+        $this->update_model->update_staff_id($id,$data);
+        $this->show_staff_id();
+    }
+
+//     <?php
+// class delete_ctrl extends CI_Controller{
+// function __construct(){
+// parent::__construct();
+// $this->load->model('system_model');
+// }
+// // Function to Fetch selected record from database.
+// function show_staff_id() {
+// $id = $this->uri->segment(3);
+// $data['staff'] = $this->system_model->show_staff();
+// $data['single_staff'] = $this->system_model->show_staff_id($id);
+// $this->load->view('delete_view', $data);
+// }
+// // Function to Delete selected record from database.
+// function delete_staff_id() {
+// $id = $this->uri->segment(3);
+// $this->system_model->delete_staff_id($id);
+// $this->show_staff_id();
+// }
+// }
+// ? ->
 }

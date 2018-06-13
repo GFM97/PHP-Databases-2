@@ -135,4 +135,25 @@ class System_Model extends CI_Model {
 
         $this->db->delete('tbl_login_info', $data);
     }
+
+    // Function to select all from table name students.
+    function show_staff(){
+    $query = $this->db->get('staff');
+    $query_result = $query->result();
+    return $query_result;
+    }
+    // Function to select particular record from table name students.
+    function show_staff_id($data){
+    $this->db->select('*');
+    $this->db->from('staff');
+    $this->db->where('staff_id', $data);
+    $query = $this->db->get();
+    $result = $query->result();
+    return $result;
+    }
+    // Function to Delete selected record from table name students.
+    function delete_staff_id($id){
+    $this->db->where('staff_id', $id);
+    $this->db->delete('staff');
+    }
 }

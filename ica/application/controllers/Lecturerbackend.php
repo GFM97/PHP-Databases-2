@@ -18,6 +18,17 @@ class Lecturerbackend extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	 function __construct()
+	 {
+	 	parent::__construct();
+	 	// if the user isn't logged in, he will be thrown out
+	 	if (!$this->check_login())
+	 	{
+	 		redirect('home');
+	 	}
+	 }
+
 	public function index()
 	{
 		$this->load->view('lecturerbackend');

@@ -56,10 +56,13 @@ $route['translate_uri_dashes'] = FALSE;
 $route['login'] = 'system/login';
 $route['login/submit'] = 'system/login_submit';
 
-$route['register'] = 'system/register';
-$route['register/submit'] = 'system/register_submit';
+$route['registerbackend'] = 'System/register';
+$route['register/submit'] = 'System/register_submit';
 
-$route['staffbackend'] = 'system/staffbackend';
-$route['staff/submit'] = 'system/staff_submit';
+$route['staffbackend'] = 'System/staff';
+$route['staff_submit'] = 'System/staff_submit';
+
+//$route['staffeditbackend'] = 'system/staff';
+//$route['staff_edit'] = 'system/staff_submit';
 
 $route['logout'] = 'system/logout';
