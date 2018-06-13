@@ -156,4 +156,43 @@ class System_Model extends CI_Model {
     $this->db->where('staff_id', $id);
     $this->db->delete('staff');
     }
+
+    public function show_all_data() {
+        $this->db->select('*');
+        $this->db->from('tbl_staff');
+        $query = $this->db->get();
+            if ($query->num_rows() > 0) {
+                return $query->result();
+            } else {
+                return false;
+            }
+        }
+
+    public function show_data_by_id($id) {
+    $condition = "staff id =" . "'" . $id . "'";
+    $this->db->select('*');
+    $this->db->from('tbl_staff');
+    $this->db->where($condition);
+    $this->db->limit(1);
+    $query = $this->db->get();
+
+        if ($query->num_rows() == 1) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+
+    public function show_data_by_subject($subject) {
+    $condition = "subject =" . "'" . $subject . "'";
+    $this->db->select('*');
+    $this->db->from('tbl_staff');
+    $this->db->where($condition);
+    $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
 }

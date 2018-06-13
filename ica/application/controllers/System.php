@@ -300,4 +300,52 @@ class System extends MY_Controller {
 // }
 // }
 // ? ->
+
+    public function index() {
+        $data['show_table'] = $this->view_table();
+        $this->load->view('select_form', $data);
+    }
+    public function view_table(){
+        $result = $this->tbl_staff->show_all_data();
+        if ($result != false) {
+            return $result;
+        } else {
+        return 'Database is empty !';
+        }
+    }
+
+    public function select_by_id() {
+        $id = $this->input->post('id');
+        if ($id != "") {
+            $result = $this->tbl_staff->show_data_by_id($id);
+            if ($result != false) {
+                $data['result_display'] = $result;
+        } else {
+            $data['result_display'] = "No record found !";
+        }
+        } else {
+        $data = array(
+            'id_error_message' => "Id field is required"
+        );
+        }
+        $data['show_table'] = $this->view_table();
+        $this->load->view('select_form', $data);
+    }
+
+    public function select_by_subject() {
+        $subject = $this->input->post('$staff_subject');
+        if ($subject != "") {
+        $result = $this->tbl_staff->show_data_by_subject($date);
+
+        if ($result != false) {
+        $data['result_display'] = $result;
+        } else {
+        $data['result_display'] = "No record found !";
+        }
+        } else {
+        $data['date_error_message'] = "Date field is required";
+        }
+        $data['show_table'] = $this->view_table();
+        $this->load->view('select_form', $data);
+    }
 }
